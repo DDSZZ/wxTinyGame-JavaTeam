@@ -1,6 +1,10 @@
-# Î¢ĞÅĞ¡ÓÎÏ·-×¦ÍÜ¶Ó
+# å¾®ä¿¡å°æ¸¸æˆ-çˆªè›™é˜Ÿ
 A WeChat tiny game project participating in the WeChat Programming Competition at NEU
-##×ÊÁÏ
-[GithubÊÓÆµ½Ì³Ì](https://www.bilibili.com/video/av55780016)
-[GithubÎÄ×Ö½Ì³Ì](https://www.liaoxuefeng.com/wiki/896043488029600)
-**ºËĞÄ¼¼Êõ:** `js` `Laya` `wx`
+
+##èµ„æ–™
+
+[Githubè§†é¢‘æ•™ç¨‹](https://www.bilibili.com/video/av55780016)
+
+[Githubæ–‡å­—æ•™ç¨‹](https://www.liaoxuefeng.com/wiki/896043488029600)
+
+**æ ¸å¿ƒæŠ€æœ¯:** `js` `Laya` `wx`
