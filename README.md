@@ -13,4 +13,6 @@ A WeChat tiny game project participating in the WeChat Programming Competition a
 
 [Laya API](http://layaair2.ldc2.layabox.com/api2)
 
+[Laya案例教程](https://layaair2.ldc2.layabox.com/demo2)
+
 **核心技术:** `js` `Laya` `wx`
