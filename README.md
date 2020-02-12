@@ -1,4 +1,4 @@
-# 微信小游戏-爪蛙队
+﻿# 微信小游戏-爪蛙队
 A WeChat tiny game project participating in the WeChat Programming Competition at NEU
 
 **资料**
@@ -15,4 +15,6 @@ A WeChat tiny game project participating in the WeChat Programming Competition a
 
 [Laya案例教程](https://layaair2.ldc2.layabox.com/demo2)
 
-**核心技术:** `js` `Laya` `wx`
+[在线MarkDown编辑器](https://www.mdeditor.com/)
+
+**核心技术:** `js` `Laya` `wx` `Java`
