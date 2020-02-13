@@ -60,7 +60,7 @@ public class UserDAO implements CRUDInterface<User> {
 
     //找到了返回对象，查找失败返回null
     @Override
-    public <K> User selete(K key) {
+    public <K> User select(K key) {
         try {
             LinkedList<User> users = FileUtil.getSingleton().readFile(PATH);
             for (User u : users) {

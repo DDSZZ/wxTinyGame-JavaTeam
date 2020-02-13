@@ -7,5 +7,5 @@ public interface CRUDInterface<T> {
 
     public <K> int update(K key, T obj);
 
-    public <K> T selete(K key);
+    public <K> T select(K key);
 }
