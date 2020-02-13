@@ -10,13 +10,17 @@ import top.phosky.mask.entity.User;
 public class LoginService {
     @Autowired
     private UserDAO userDAO;
+    @Autowired
+    private RankService rankService;
 
     //老用户返回2，新用户返回1，错误返回0
     public int login(AccountDTO accountDTO) {
         User user = userDAO.select(accountDTO.getWxID());
         if (user == null) {//新用户，添加到数据库
-            int status = userDAO.insert(new User(accountDTO.getWxID(), accountDTO.getNickName(), 0));
+            User userNew = new User(accountDTO.getWxID(), accountDTO.getNickName(), 0);
+            int status = userDAO.insert(userNew);
             if (status == 1) {
+                rankService.getUsersOrdered().insert(userNew);
                 return 1;
             } else {
                 return 0;

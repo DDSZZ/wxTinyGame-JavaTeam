@@ -73,4 +73,10 @@ public class UserDAO implements CRUDInterface<User> {
         }
         return null;
     }
+
+    //返回所有的数据
+    public LinkedList<User> getAllUsers() {
+        LinkedList<User> users = FileUtil.getSingleton().readFile(PATH);
+        return users;
+    }
 }

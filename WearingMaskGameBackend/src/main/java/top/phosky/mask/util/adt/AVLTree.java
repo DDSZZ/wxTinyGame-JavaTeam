@@ -18,7 +18,6 @@ package top.phosky.mask.util.adt;
 //Throws UnderflowException as appropriate
 
 import org.jetbrains.annotations.NotNull;
-import top.phosky.mask.entity.User;
 
 import java.util.Iterator;
 
@@ -326,15 +325,15 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> implements Ite
     @NotNull
     @Override
     public Iterator<AnyType> iterator() {
-        Queue<AnyType> answerQueue = innerTravesal(root, new Queue<>());
+        Queue<AnyType> answerQueue = innerTraversal(root, new Queue<>());
         return answerQueue.iterator();
     }
 
-    private Queue<AnyType> innerTravesal(AvlNode<AnyType> current, Queue<AnyType> ansQueue) {
+    private Queue<AnyType> innerTraversal(AvlNode<AnyType> current, Queue<AnyType> ansQueue) {
         if (current != null) {
-            ansQueue = innerTravesal(current.left, ansQueue);
+            ansQueue = innerTraversal(current.left, ansQueue);
             ansQueue.push(current.element);
-            ansQueue = innerTravesal(current.right, ansQueue);
+            ansQueue = innerTraversal(current.right, ansQueue);
         }
         return ansQueue;
     }
@@ -362,28 +361,6 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> implements Ite
      * The tree root.
      */
     private AvlNode<AnyType> root;
-
-    // Test program
-    public static void main(String[] args) {
-        AVLTree<User> t = new AVLTree<>();
-        User u1 = new User("1", "", 123);
-        User u2 = new User("2", "", 15151);
-        User u3 = new User("3", "", 434);
-        User u4 = new User("4", "", 999999);
-        User u5 = new User("5", "", 54444);
-        User u6 = new User("6", "", 345456);
-        t.insert(u1);
-        t.insert(u2);
-        t.insert(u3);
-        t.insert(u4);
-        t.insert(u5);
-        t.insert(u6);
-        for (User u : t) {
-            System.out.println(u.getWxID() + "  " + u.getMaxMarks());
-        }
-
-
-    }
 }
 
 /**

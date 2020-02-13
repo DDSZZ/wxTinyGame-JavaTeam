@@ -43,10 +43,11 @@ public class User implements Comparable<User> {
         int mark2 = o.getMaxMarks();
         if (mark1 < mark2) {
             return 1;
-        } else if (mark1 == mark2) {
+        } else if (mark1 == mark2 && this.wxID.equals(o.getWxID())) {//等于的要求很严苛
             return 0;
-        } else {
+        } else if (mark1 > mark2) {
             return -1;
         }
+        return 1;//分数值相等，但是不是一个元素
     }
 }

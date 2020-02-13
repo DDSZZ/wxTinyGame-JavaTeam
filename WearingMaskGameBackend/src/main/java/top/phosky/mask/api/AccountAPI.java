@@ -7,11 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import top.phosky.mask.dto.AccountDTO;
 import top.phosky.mask.service.LoginService;
+import top.phosky.mask.service.RankService;
 
 @Controller
 public class AccountAPI {
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private RankService rankService;
 
     /**
      * 玩家登录游戏的时候访问的API，将会更新玩家的昵称(如果微信名称被修改了)
@@ -20,25 +23,31 @@ public class AccountAPI {
      * <p>
      * 传入参数: 带有wxID(String)，nickName(String)的封装类JSON字符串
      * <p>
-     * 返回数字int
-     * 登录成功且为老用户返回2
-     * 登录成功且为新用户1
-     * 传入参数错误返回0
-     * 其他错误返回-1
+     * 返回信息字符串
+     * 登录成功且为老用户返回OLD_ACCOUNT
+     * 登录成功且为新用户NEW_ACCOUNT
+     * 传入参数错误返回PARAM_FAULT
+     * 其他错误返回UNKNOWN_FAULT
      */
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
     @ResponseBody
-    public int login(@RequestParam(name = "accountObj") String accountObj) {
+    public String login(@RequestParam(name = "accountObj") String accountObj) {
         try {
             JSONObject obj = JSON.parseObject(accountObj);
             String wxID = obj.getString("wxID");
             String nickName = obj.getString("nickName");
             AccountDTO accountDTO = new AccountDTO(wxID, nickName);
             int status = loginService.login(accountDTO);
-            return status;
+            if (status == 1) {
+                return "NEW_ACCOUNT";
+            } else if (status == 2) {
+                return "OLD_ACCOUNT";
+            } else if (status == 0) {
+                return "PARAM_FAULT";
+            }
         } catch (Exception err) {
             err.printStackTrace();
         }
-        return -1;
+        return "UNKNOWN_FAULT";
     }
 }
