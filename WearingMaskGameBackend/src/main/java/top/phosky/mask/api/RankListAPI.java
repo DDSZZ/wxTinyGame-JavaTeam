@@ -1,23 +1,33 @@
 package top.phosky.mask.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import top.phosky.mask.dto.SelfRankDTO;
+import top.phosky.mask.service.RankService;
 
 @Controller
 public class RankListAPI {
+    @Autowired
+    private RankService rankService;
+
     /**
      * 获得某个玩家的分数及排名
      * <p>
      * 传入参数:玩家的wxID
-     * 返回状态类(state:int，content:String)的JSON字符串
+     * 返回JSON字符串：marks:int rank:int
+     * 未根据id找到数据返回"NULL_WX_ID"
      */
     @RequestMapping(value = "/api/getRank", method = RequestMethod.POST)
     @ResponseBody
     public String getRank(@RequestParam(name = "wxID") String wxID) {
-        //TODO
+        SelfRankDTO selfRankDTO = rankService.getRankAndScore(wxID);
+        if (selfRankDTO == null) {
+            return "NULL_WX_ID";
+        }
         return null;
     }
 
