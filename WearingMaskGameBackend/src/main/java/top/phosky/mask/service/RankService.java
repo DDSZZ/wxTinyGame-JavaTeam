@@ -1,6 +1,7 @@
 package top.phosky.mask.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import top.phosky.mask.dao.file.UserDAO;
 import top.phosky.mask.dto.SelfRankDTO;
@@ -10,7 +11,7 @@ import top.phosky.mask.util.adt.AVLTree;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-@Controller
+@Component
 public class RankService {
     @Autowired
     private UserDAO userDAO;

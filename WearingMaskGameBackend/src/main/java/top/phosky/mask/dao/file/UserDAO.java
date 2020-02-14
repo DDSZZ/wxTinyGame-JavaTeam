@@ -1,5 +1,6 @@
 package top.phosky.mask.dao.file;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import top.phosky.mask.WearMaskGameApplication;
 import top.phosky.mask.entity.User;
@@ -8,7 +9,7 @@ import top.phosky.mask.util.FileUtil;
 
 import java.util.LinkedList;
 
-@Controller
+@Component
 public class UserDAO implements CRUDInterface<User> {
     private final static String PATH = WearMaskGameApplication.PATH + "\\data\\Users.dat";
 

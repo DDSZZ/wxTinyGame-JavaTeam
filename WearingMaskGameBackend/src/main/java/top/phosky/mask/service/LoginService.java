@@ -1,12 +1,13 @@
 package top.phosky.mask.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import top.phosky.mask.dao.file.UserDAO;
 import top.phosky.mask.dto.AccountDTO;
 import top.phosky.mask.entity.User;
 
-@Controller
+@Component
 public class LoginService {
     @Autowired
     private UserDAO userDAO;
