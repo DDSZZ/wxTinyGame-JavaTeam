@@ -70,7 +70,6 @@ public class RankListAPI {
             top5DTO.setTop4(usersTop5.get(3));
             top5DTO.setTop5(usersTop5.get(4));
             return JSON.toJSONString(top5DTO);
-
         } catch (Exception err) {
             err.printStackTrace();
         }
