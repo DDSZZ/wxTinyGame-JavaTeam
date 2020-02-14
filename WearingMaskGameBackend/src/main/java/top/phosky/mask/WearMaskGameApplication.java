@@ -3,6 +3,7 @@ package top.phosky.mask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import top.phosky.mask.test.AccountTest;
 import top.phosky.mask.service.RankService;
 
@@ -14,8 +15,8 @@ public class WearMaskGameApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WearMaskGameApplication.class, args);
-        rankService.initUserOrdered();
-        AccountTest.main(null);
+        //test
+        // AccountTest.main(null);
 
 
     }

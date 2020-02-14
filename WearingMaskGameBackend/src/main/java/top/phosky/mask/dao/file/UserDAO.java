@@ -1,5 +1,6 @@
 package top.phosky.mask.dao.file;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import top.phosky.mask.WearMaskGameApplication;
@@ -10,6 +11,7 @@ import top.phosky.mask.util.FileUtil;
 import java.util.LinkedList;
 
 @Component
+@Order(-1)
 public class UserDAO implements CRUDInterface<User> {
     private final static String PATH = WearMaskGameApplication.PATH + "\\data\\Users.dat";
 
@@ -22,6 +24,7 @@ public class UserDAO implements CRUDInterface<User> {
                 users = new LinkedList<>();
             }
             users.add(obj);
+            FileUtil.getSingleton().saveFile(PATH, users);
             return 1;
         } catch (Exception err) {
             err.printStackTrace();
@@ -41,14 +44,20 @@ public class UserDAO implements CRUDInterface<User> {
         try {
             boolean isFound = false;
             LinkedList<User> users = FileUtil.getSingleton().readFile(PATH);
+            if (users == null) {
+                users = new LinkedList<>();
+            }
+            int i = 0;//修改用迭代其中的失败
             for (User u : users) {
                 if (u.getWxID().equals(key)) {
-                    u = obj;
                     isFound = true;
                     break;
                 }
+                i++;
             }
             if (isFound) {
+                users.set(i, obj);
+                FileUtil.getSingleton().saveFile(PATH, users);
                 return 1;
             } else {
                 return -1;
@@ -64,6 +73,9 @@ public class UserDAO implements CRUDInterface<User> {
     public <K> User select(K key) {
         try {
             LinkedList<User> users = FileUtil.getSingleton().readFile(PATH);
+            if (users == null) {
+                users = new LinkedList<>();
+            }
             for (User u : users) {
                 if (u.getWxID().equals(key)) {
                     return u;
@@ -78,6 +90,9 @@ public class UserDAO implements CRUDInterface<User> {
     //返回所有的数据
     public LinkedList<User> getAllUsers() {
         LinkedList<User> users = FileUtil.getSingleton().readFile(PATH);
+        if (users == null) {
+            users = new LinkedList<>();
+        }
         return users;
     }
 }

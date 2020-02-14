@@ -1,16 +1,6 @@
 package top.phosky.mask.util;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -600,17 +590,22 @@ public final class FileUtil {
      * 1:保存成功
      */
     public synchronized <T> int saveFile(String absolutePathName, T object) {
+        ObjectOutputStream oos = null;
         try {
             File f = fileEmptyDeal(absolutePathName);
             if (f == null) {
                 return -1;
             }
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+            oos = new ObjectOutputStream(new FileOutputStream(f));
             oos.writeObject(object);
             oos.close();
             return 1;
         } catch (Exception err) {
             err.printStackTrace();
+            try {
+                oos.close();
+            } catch (Exception e) {
+            }
         }
         return 0;
     }
@@ -626,13 +621,19 @@ public final class FileUtil {
     @SuppressWarnings("unchecked")
     public synchronized <T> T readFile(String absolutePathName) {
         T ans = null;
+        ObjectInputStream ois = null;
         try {
             File f = fileEmptyDeal(absolutePathName);
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+            ois = new ObjectInputStream(new FileInputStream(f));
             ans = (T) ois.readObject();
             ois.close();
             return ans;
         } catch (Exception err) {
+            System.err.println("FileUtil: " + err.getMessage());
+            try {
+                ois.close();
+            } catch (Exception e) {
+            }
             return null;
         }
     }

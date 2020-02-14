@@ -87,7 +87,6 @@ public class RankListAPI {
     @RequestMapping(value = "/api/setRank", method = RequestMethod.POST)
     @ResponseBody
     public String setRank(@RequestParam(name = "wxID") String wxID, @RequestParam(name = "marks") int marks) {
-        //TODO
         int status = rankService.setRank(wxID, marks);
         switch (status) {
             case 1:

@@ -26,7 +26,11 @@ public class LoginService {
             } else {
                 return 0;
             }
-        } else {
+        } else {//更新昵称
+            if (!accountDTO.getNickName().equals(user.getNickName())) {
+                user.setNickName(accountDTO.getNickName());
+                userDAO.update(accountDTO.getWxID(), user);
+            }
             return 2;
         }
     }

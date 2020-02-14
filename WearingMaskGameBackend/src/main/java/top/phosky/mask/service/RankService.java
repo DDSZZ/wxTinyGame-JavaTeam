@@ -1,6 +1,8 @@
 package top.phosky.mask.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import top.phosky.mask.dao.file.UserDAO;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 @Component
+@Order(1)
 public class RankService {
     @Autowired
     private UserDAO userDAO;
@@ -19,6 +22,10 @@ public class RankService {
      * 用户的排名顺序，在内存中存储，需要持续更新数据
      */
     public AVLTree<User> usersOrdered;
+
+    private RankService() {
+        initUserOrdered();//DEBUG
+    }
 
     public SelfRankDTO getRankAndScore(String wxID) {
         User user = userDAO.select(wxID);
@@ -52,7 +59,9 @@ public class RankService {
             int status = userDAO.update(wxID, user);
             if (status == 1) {
                 //更改在AVL树中的数据，即移动AVl树
-                usersOrdered.remove(user);//方法内部根据id值比较user的不同
+                user.setMaxMarks(preMarks);//DEBUG
+                usersOrdered.remove(user);//方法内部根据id值比较user的不同,前提是id值相同
+                user.setMaxMarks(marks);
                 usersOrdered.insert(user);//再添加
                 return 1;
             } else if (status == -1) {
@@ -70,6 +79,9 @@ public class RankService {
 
     public void initUserOrdered() {
         usersOrdered = new AVLTree<>();
+        if (userDAO == null) {//TODO
+            userDAO = new UserDAO();
+        }
         LinkedList<User> users = userDAO.getAllUsers();
         for (User u : users) {
             usersOrdered.insert(u);
