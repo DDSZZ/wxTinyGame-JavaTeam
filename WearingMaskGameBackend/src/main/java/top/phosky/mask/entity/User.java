@@ -49,7 +49,7 @@ public class User implements Comparable<User>, Serializable {
             if (this.wxID.equals(o.getWxID())) {//等于的要求很严苛
                 return 0;
             } else {//二级比较，根据昵称比较
-                if (this.getNickName().compareTo(o.getNickName()) <= 0) {//DEBUG: 从小到大排序
+                if (this.getNickName().compareTo(o.getNickName()) >= 0) {//字母从小到大排序
                     return 1;//不能返回0，因为返回0表示同一个账户
                 } else {
                     return -1;
