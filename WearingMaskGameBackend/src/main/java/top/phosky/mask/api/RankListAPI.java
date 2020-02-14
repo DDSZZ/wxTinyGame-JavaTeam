@@ -49,7 +49,10 @@ public class RankListAPI {
      * 得到世界前5名的数据
      * <p>
      * 无传入参数
-     * 返回包含五个User属性的JSON字符串,可能会带有空
+     * 返回包含五个User属性的JSON字符串
+     * <p>
+     * 若游玩总人数不足5，则返回的JSON字符串中不包含完整的5个属性
+     * <p>
      * 未知错误返回UNKNOWN_FAULT
      */
     @RequestMapping(value = "/api/getRankTop5", method = RequestMethod.POST)
@@ -58,7 +61,7 @@ public class RankListAPI {
         try {
             ArrayList<User> usersTop5 = rankService.getRankTop5();
             Top5DTO top5DTO = new Top5DTO(null, null, null, null, null);
-            for (int i = usersTop5.size() - 1; i < 5; i++) {
+            for (int i = usersTop5.size(); i < 5; i++) {//DEBUG
                 usersTop5.add(null);//防止get时空指针异常
             }
             top5DTO.setTop1(usersTop5.get(0));
