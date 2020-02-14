@@ -20,6 +20,8 @@ public class RankService {
     private UserDAO userDAO;
     /**
      * 用户的排名顺序，在内存中存储，需要持续更新数据
+     * <p>
+     * 在这个程序中，左子树分数高，名称按从小到大
      */
     public AVLTree<User> usersOrdered;
 
