@@ -18,3 +18,4 @@ A WeChat tiny game project participating in the WeChat Programming Competition a
 [在线MarkDown编辑器](https://www.mdeditor.com/)
 
 **核心技术:** `js` `Laya` `wx` `Java`
+test push
